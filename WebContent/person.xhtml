@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>JSF Spring Hibernate Integration</title>
+	<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+</h:head>
+<h:body>
+	<h1>Add a Clienteerson</h1>
+	<h:form>
+		<table>
+			<tr>
+				<td><label>Name</label></td>
+				<td><h:inputText id="name" value="#{cliente.nome}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Sobrenome</label></td>
+				<td><h:inputText id="sobrenome" value="#{cliente.sobrenome}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Senha</label></td>
+				<td><h:inputText id="senha" value="#{cliente.senha}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Email</label></td>
+				<td><h:inputText id="email" value="#{cliente.email}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Aniversario</label></td>
+				<td><h:inputText id="aniversario" value="#{cliente.aniversario}">
+						<f:convertDateTime pattern="dd-mm-yyyy" />
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><h:commandButton
+						action="#{clienteService.save(cliente)}" value="Add Cliente"></h:commandButton>
+				</td>
+			</tr>
+
+		</table>
+
+	</h:form>
+
+	<br />
+	<h3>Client List</h3>
+<h:panelGroup id="shipmentTermsBox">
+<h:form>
+	<c:if test="${!empty clienteService.list()}">
+		<table class="tg">
+			<tr>
+				<th width="80">ID</th>
+				<th width="120">Nome</th>
+				<th width="120">Sobrenome</th>
+				<th width="120">Delete</th>
+			</tr>
+			<ui:repeat value="${clienteService.list()}" var="cliente">
+				<tr>
+					<td>${cliente.id}</td>
+					<td>${cliente.nome}</td>
+					<td>${cliente.sobrenome}</td>
+					<td> <h:commandButton value="Remove">
+                           <f:ajax event="action" listener="#{clienteService.delete(cliente)}" render="shipmentTermsBox"/>
+                       </h:commandButton>
+    				</td>
+				</tr>
+			</ui:repeat>
+		</table>
+	</c:if>
+	</h:form>
+</h:panelGroup>
+</h:body>
+</html>

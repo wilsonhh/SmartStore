@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.password">smart_store_dev</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/smart_store</property>
+		<property name="hibernate.connection.username">smart_store_dev</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">false</property>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		
+		<!-- Person -->
+		<mapping class="com.wilson.model.Cliente" />
+		<mapping class="com.wilson.model.Empresa" />
+		
+	</session-factory>
+</hibernate-configuration>
